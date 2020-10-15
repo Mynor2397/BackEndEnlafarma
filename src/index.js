@@ -1,5 +1,7 @@
 const app = require('./app/app')
-require('./app/database/database')
+
+require('./config/database')
+
 
 app.listen(app.get('port'), (err) => {
     if(err){
