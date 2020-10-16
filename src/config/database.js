@@ -19,3 +19,5 @@ bdconnect.connect((err) => {
         console.log('Database is connect')
     }
 })
+
+module.exports = bdconnect
