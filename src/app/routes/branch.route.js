@@ -6,3 +6,4 @@ route.route('/').get(getBranch)
 route.route('/:id').get(getBranchid)
 
 module.exports = route
+
