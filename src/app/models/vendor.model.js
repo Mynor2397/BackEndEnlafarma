@@ -1,10 +1,10 @@
 const connect = require('../database/database')
 
 var dataModels = {
-    getBranch: (callback) => {
+    getVendor: (callback) => {
 
         if(connect){
-            let sql = `select idbranch, name, vendors_idvendor from branch`
+            let sql = `select idvendor, name from vendors`
 
             connect.query(sql, (error, rows) => {
                if (error) throw error
@@ -15,10 +15,10 @@ var dataModels = {
 }
 
 
-const branchStorage = {}
+const vendorStorage = {}
 
-branchStorage.getbyId = async (id) => {
-var sql = `select idbranch, name, vendors_idvendor from branch where idbranch = ?`
+vendorStorage.getbyId = async (id) => {
+var sql = `select idvendor, name from vendors where idvendor = ?`
     return new Promise((resolve, reject) => {
         connect.query(sql, [id], (err, rows) => {
             if(err) {
@@ -34,5 +34,5 @@ var sql = `select idbranch, name, vendors_idvendor from branch where idbranch = 
 
 module.exports = {
     dataModels,
-    branchStorage
+    vendorStorage
 } 
