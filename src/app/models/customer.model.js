@@ -44,12 +44,32 @@ customStorage.getbybranch = async (br) => {
                     reject(err)
                 }
                 if(rows){
-                    resolve(rows[0])
+                    resolve(rows)
                 }
             }) 
         }) 
     
     }
+
+customStorage.getbyproduct = async (pr) => {
+var sql = `select sa.idsales as factura, sa.date, pr.name,de.price, de.quantity, de.total
+                from sales sa
+                inner join datails de on de.iddatails = sa.idsales
+                inner join product pr on pr.idproduct = de.product_idproduct
+                inner join customers cu on cu.idcustomer = sa.customer_idcustomer
+                where cu.idcustomer = ?;`
+    return new Promise((resolve, reject) => {
+        connect.query(sql, [pr], (err, rows) => {
+            if(err) {
+                reject(err)
+            }
+            if(rows){
+                resolve(rows)
+            }
+        }) 
+    }) 
+
+}
 
 
 
