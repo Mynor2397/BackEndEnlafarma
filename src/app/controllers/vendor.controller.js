@@ -1,10 +1,19 @@
-const { dataModels, vendorStorage }  = require('../models/vendor.model')
+const { vendorStorage }  = require('../models/vendor.model')
+const respondError = require('./respondError')
 
-function getVendor(req, res) {
-    dataModels.getVendor((data, error) => {
-        res.json(data)
-    })
-
+async function getVendor(req, res) {
+    try {
+    let results = await vendorStorage.getVendor()
+        return res
+            .status(200)
+            .json({
+                ok: true,
+                data: results
+            })
+    } catch (error) {
+        respondError(res, error)
+        return
+    }
 }
 
 async function getVendorid(req, res) {

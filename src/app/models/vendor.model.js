@@ -1,21 +1,23 @@
 const connect = require('../database/database')
 
-var dataModels = {
-    getVendor: (callback) => {
-
-        if(connect){
-            let sql = `select idvendor, name from vendors`
-
-            connect.query(sql, (error, rows) => {
-               if (error) throw error
-                callback(rows)
-            })
-        }
-    }
-}
-
-
 const vendorStorage = {}
+
+vendorStorage.getVendor = async () => {
+
+    let sql = `select idvendor, name from vendors`
+
+    return new Promise((resolve, reject) => {
+        connect.query(sql, (err, rows) => {
+            if (err) {
+                reject(err)
+                console.log(rows)
+            }
+            if (rows) {
+                resolve(rows)
+            }
+        })
+    })
+}
 
 vendorStorage.getbyId = async (id) => {
 var sql = `select idvendor, name from vendors where idvendor = ?`
@@ -32,7 +34,4 @@ var sql = `select idvendor, name from vendors where idvendor = ?`
 
 }
 
-module.exports = {
-    dataModels,
-    vendorStorage
-} 
+module.exports = { vendorStorage } 

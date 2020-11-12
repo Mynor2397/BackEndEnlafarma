@@ -1,34 +1,37 @@
 const connect = require('../database/database')
+const Customer = require('./customer')
+const customStorage = {}
 
-var dataModels = {
-    getCustom: (callback) => {
+customStorage.getCustom = async () => {
 
-        if(connect){
-            let sql = `select idcustomer, name, address, nit, contact, phone from customers`
+    let sql = `select idcustomer, name, address, nit, contact, phone from customers`
 
-            connect.query(sql, (error, rows) => {
-               if (error) throw error
-                callback(rows)
-            })
-        }
-    }
+    return new Promise((resolve, reject) => {
+        connect.query(sql, (err, rows) => {
+            if (err) {
+                reject(err)
+                console.log(rows)
+            }
+            if (rows) {
+                resolve(rows)
+            }
+        })
+    })
 }
 
 
-const customStorage = {}
-
 customStorage.getbyId = async (id) => {
-var sql = `select idcustomer, name, address, nit, contact, phone from customers where idcustomer = ?`
+    var sql = `select idcustomer, name, address, nit, contact, phone from customers where idcustomer = ?`
     return new Promise((resolve, reject) => {
         connect.query(sql, [id], (err, rows) => {
-            if(err) {
+            if (err) {
                 reject(err)
             }
-            if(rows){
+            if (rows) {
                 resolve(rows[0])
             }
-        }) 
-    }) 
+        })
+    })
 
 }
 
@@ -38,21 +41,20 @@ customStorage.getbybranch = async (br) => {
                 inner join branch br on br.idbranch = ve.idvendor
                 inner join customers cu on cu.branch_idbranch = br.idbranch
                 where br.idbranch = ?`
-        return new Promise((resolve, reject) => {
-            connect.query(sql, [br], (err, rows) => {
-                if(err) {
-                    reject(err)
-                }
-                if(rows){
-                    resolve(rows)
-                }
-            }) 
-        }) 
-    
-    }
+    return new Promise((resolve, reject) => {
+        connect.query(sql, [br], (err, rows) => {
+            if (err) {
+                reject(err)
+            }
+            if (rows) {
+                resolve(rows)
+            }
+        })
+    })
+}
 
-customStorage.getbyproduct = async (pr) => {
-var sql = `select sa.idsales as factura, sa.date, pr.name,de.price, de.quantity, de.total
+customStorage.getproductbycustomer = async (pr) => {
+    var sql = `select sa.idsales as factura, sa.date, pr.name,de.price, de.quantity, de.total
                 from sales sa
                 inner join datails de on de.iddatails = sa.idsales
                 inner join product pr on pr.idproduct = de.product_idproduct
@@ -60,20 +62,38 @@ var sql = `select sa.idsales as factura, sa.date, pr.name,de.price, de.quantity,
                 where cu.idcustomer = ?;`
     return new Promise((resolve, reject) => {
         connect.query(sql, [pr], (err, rows) => {
-            if(err) {
+            if (err) {
                 reject(err)
             }
-            if(rows){
+            if (rows) {
                 resolve(rows)
             }
-        }) 
-    }) 
+        })
+    })
+}
 
+customStorage.createCustomer = async (customer) => {
+    let custo = new Customer()
+    custo = customer;
+    let sql = `insert into customers (name, address, nit, contact, phone, vendors_idvendor, branch_idbranch) values (?,?,?,?,?,?,?)`
+
+    return new Promise((resolve, reject) => {
+        connect.query(sql, [
+            custo.name, custo.address, custo.nit, custo.contact, custo.phone, custo.vendors_idvendor, custo.branch_idbranch
+        ], (err, rows) => {
+            if (err) {
+               if(err.errno){
+                reject({
+                    code: err.errno,
+                    error: err
+                })
+                console.log(rows)   
+               }
+            }
+            resolve(custo)
+        })
+    })
 }
 
 
-
-module.exports = {
-    dataModels,
-    customStorage
-} 
+module.exports = { customStorage } 

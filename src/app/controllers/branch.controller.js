@@ -1,7 +1,7 @@
 const { branchStorage } = require('../models/branch.model')
 const respondError = require('./respondError')
 
-async function getBranch(req, res) {
+async function getBranch(req, res) { 
     try {
         let results = await branchStorage.getBranch(req.user.idvendor)
         console.log(results)
