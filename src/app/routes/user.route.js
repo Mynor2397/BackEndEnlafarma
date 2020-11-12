@@ -1,10 +1,7 @@
-const route = require('express').Router()
+const router = require('express').Router()
+const {create } = require('../controllers/auth.controller')
+const { AuthAdmin } = require('../middlewares/auth')
 
-const { Login } = require('../controllers/auth.controller')
-const { Auth } = require('../middlewares/auth')
+router.post('/', AuthAdmin, create)
 
-
-route.route('/Login').post(Login)
-route.route('/user/profile').post(Auth)
-
-module.exports = route
+module.exports = router

@@ -1,0 +1,12 @@
+@hostdev = http://localhost:4002/api
+
+###
+POST 
+
+
+###
+GET {{hostdev}}/branchs
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMjA2MjU4Yi0yZjA5LTQ0MmUtYWE0NC0yOTc1NDk0MzdmYzEiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjozLCJpYXQiOjE2MDUxMzYzOTIsImV4cCI6MTYwNTE2ODc5Mn0.JeabxEn40-CKYHf4oUbyDYXGQklqT5HHxxc5Mrj8lWM
+Content-Type: application/json
+
+

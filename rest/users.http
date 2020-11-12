@@ -1,0 +1,24 @@
+@hostdev = http://localhost:4002/api
+@hostfree = http://localhost:4002
+
+###
+POST {{hostdev}}/users
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMjA2MjU4Yi0yZjA5LTQ0MmUtYWE0NC0yOTc1NDk0MzdmYzEiLCJyb2wiOiJhZG1pbiIsImlhdCI6MTYwNTEzMjY0MywiZXhwIjoxNjA1MTY1MDQzfQ.u0HovIofVePJAe1-hL3teUqDaAGGz9GET406_xGCZVc
+Content-Type: application/json
+
+{
+    "email":"lcisnerosm@gmail.com",
+    "password":"123",
+    "rol":"3",
+    "idvendor":"3"
+}
+
+
+###
+POST {{hostfree}}/login
+Content-Type: application/json
+
+{
+    "email":"lcisnerosm@gmail.com",
+    "password":"123"
+}
