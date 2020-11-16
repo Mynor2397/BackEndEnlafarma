@@ -1,8 +1,10 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { Login } = require('../controllers/auth.controller');
 const db = require("../database/database");
 const authStorage = {};
 
 authStorage.get = async (email) => {
+    console.log(email);
     return new Promise((resolve, reject) => {
         db.query(
             `
@@ -22,7 +24,7 @@ authStorage.get = async (email) => {
 
                     reject(err);
                 }
-                console.log(email)
+                console.log(results)
                 if (results) {
                     if (results.length == 0) {
                         reject({
@@ -38,6 +40,7 @@ authStorage.get = async (email) => {
 };
 
 authStorage.create = async (idUserLogin, email, password, rol, idvendor) => {
+    console.log(idUserLogin, email, password, rol, idvendor);
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 12, function (err, hashPass) {
             db.query(`

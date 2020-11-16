@@ -1,24 +1,26 @@
 @hostdev = http://localhost:4002/api
 @hostfree = http://localhost:4002
 
+
+//ESTO ES PARA CREAR USUARIOS
 ###
 POST {{hostdev}}/users
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMjA2MjU4Yi0yZjA5LTQ0MmUtYWE0NC0yOTc1NDk0MzdmYzEiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjozLCJpYXQiOjE2MDUxNTM5MTYsImV4cCI6MTYwNTE4NjMxNn0.d2-7Hd7qonpP8s1vBbOBjzqYIOOIKsv0B86_EEVWT0Q
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMjA2MjU4Yi0yZjA5LTQ0MmUtYWE0NC0yOTc1NDk0MzdmYzEiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjozLCJpYXQiOjE2MDU0NzY0NzEsImV4cCI6MTYwNTUwODg3MX0.fdClCul5kmGEdgdQurwPt04MxZ9Xe3YF5fYvc4oxs3M
 Content-Type: application/json
 
 {
-    "email":"lcisnerosm@gmail.com",
+    "email":"luis@gmail.com",
     "password":"123",
-    "rol":"3",
-    "idvendor":"3"
+    "rol":"1",
+    "idvendor":"1"
 }
 
-
+//ESTO ES PARA LOGIN
 ###
 POST {{hostfree}}/login
 Content-Type: application/json
 
 {
-    "email":"lcisnerosm@gmail.com",
+    "email":"luis@gmail.com",
     "password":"123"
 }
