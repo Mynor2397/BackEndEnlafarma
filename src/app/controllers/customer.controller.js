@@ -4,7 +4,7 @@ const Customer = require('../models/customer')
 
 async function getCustom(req, res) {
     try {
-        let results = await customStorage.getCustom()
+        let results = await customStorage.getCustom(req.user.idvendor)
         return res
             .status(200)
             .json({
@@ -18,10 +18,9 @@ async function getCustom(req, res) {
 }
 
 async function getCustomid(req, res) {
-    console.log("id : ", req.params.id)
-    let id = req.params.id
+    let idcustomer = req.params.id
     try {
-        let data = await customStorage.getbyId(id)
+        let data = await customStorage.getbyId(req.user.idvendor, idcustomer)
         return res.status(200).json({
             ok: true,
             data: data

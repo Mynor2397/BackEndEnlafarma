@@ -6,20 +6,21 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMmZjZTEwM
 Content-Type: application/json
 
 {
-    "data": [
-        {
-       "customer_idcustomer": 1,
-       "price": 35,
-       "quantity": 10,
-       "total": 350,
-       "product_idproduct": 4
-   },
-   {
-       "customer_idcustomer": 1,
-       "price": 10,
-       "quantity": 10,
-       "total": 100,
-       "product_idproduct": 3
-   }
-    ]
+   "data":[
+      {
+         "customer_idcustomer":30,
+         "price":35,
+         "quantity":10,
+         "total":350,
+         "product_idproduct":4
+      },
+      {
+         "customer_idcustomer":30,
+         "price":10,
+         "quantity":10,
+         "total":100,
+         "product_idproduct":3
+      }
+   ]
 }
+

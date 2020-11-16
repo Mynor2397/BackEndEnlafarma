@@ -2,12 +2,15 @@ const connect = require('../database/database')
 const Customer = require('./customer')
 const customStorage = {}
 
-customStorage.getCustom = async () => {
+customStorage.getCustom = async (idvendor) => {
 
-    let sql = `select idcustomer, name, address, nit, contact, phone from customers`
+    let sql = `
+    select ve.idvendor, ve.name AS name_vendor, cu.idcustomer, cu.name, cu.address, cu.nit, cu.contact, cu.phone from customers cu
+    INNER JOIN vendors ve ON cu.vendors_idvendor = ve.idvendor
+    WHERE ve.idvendor = ?`
 
     return new Promise((resolve, reject) => {
-        connect.query(sql, (err, rows) => {
+        connect.query(sql, [idvendor], (err, rows) => {
             if (err) {
                 reject(err)
                 console.log(rows)
@@ -20,10 +23,14 @@ customStorage.getCustom = async () => {
 }
 
 
-customStorage.getbyId = async (id) => {
-    var sql = `select idcustomer, name, address, nit, contact, phone from customers where idcustomer = ?`
+customStorage.getbyId = async (idvendor, idcustomer) => {
+    let sql = `
+    select ve.idvendor, ve.name AS name_vendor, cu.idcustomer, cu.name, cu.address, cu.nit, cu.contact, cu.phone from customers cu
+    INNER JOIN vendors ve ON cu.vendors_idvendor = ve.idvendor
+    WHERE ve.idvendor = ? AND cu.idcustomer = ? `
+
     return new Promise((resolve, reject) => {
-        connect.query(sql, [id], (err, rows) => {
+        connect.query(sql, [idvendor, idcustomer], (err, rows) => {
             if (err) {
                 reject(err)
             }
@@ -36,8 +43,12 @@ customStorage.getbyId = async (id) => {
 }
 
 customStorage.getbybranch = async (br) => {
-    var sql = `SELECT * FROM customers
-    where branch_idbranch = ?;`
+    var sql = `
+    SELECT ven.name as name_vendor, br.name as name_branch, br.idbranch, cu.idcustomer, cu.name as name_customer 
+    FROM customers cu
+    INNER JOIN branch br ON cu.branch_idbranch = br.idbranch
+    INNER JOIN vendors ven ON br.vendors_idvendor = ven.idvendor
+    WHERE br.idbranch = ?;`
     return new Promise((resolve, reject) => {
         connect.query(sql, [br], (err, rows) => {
             if (err) {

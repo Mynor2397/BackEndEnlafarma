@@ -27,5 +27,22 @@ salesController.crearpedido = async (req, res) => {
     }
 }
 
+salesController.getHistory = async (req, res) => {
+    let idcustomer = req.params.idcustomer
+
+    try {
+        let results = await saleStorage.getHistory(idcustomer)
+        return res
+            .status(201)
+            .json({
+                ok: true,
+                data: results
+            })
+    } catch (error) {
+        respondError(res, err)
+        return
+    }
+}
+
 
 module.exports = salesController

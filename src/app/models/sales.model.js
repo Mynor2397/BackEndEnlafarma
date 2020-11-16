@@ -1,5 +1,6 @@
 const connect = require('../database/database')
 const uuid = require('uuid')
+const { query } = require('express')
 const saleStorage = {}
 
 saleStorage.createSale = async (ventas) => {
@@ -42,4 +43,26 @@ saleStorage.createSale = async (ventas) => {
         })
     })
 }
+
+
+saleStorage.getHistory = (idcustomer) => {
+    let query = `
+    SELECT cus.idcustomer, sal.date as fecha, det.iddatails as factura, det.quantity, det.price, det.total FROM datails det
+    INNER JOIN sales sal ON det.sales_idsales = sal.idsales
+    INNER JOIN customers cus ON sal.customer_idcustomer = cus.idcustomer
+    WHERE cus.idcustomer = ?`
+
+    return new Promise((resolve, reject) => {
+        connect.query(query, [idcustomer], (err, rows) => {
+            if (err){
+                reject(err)
+            }
+
+            resolve(rows)
+        })
+    })
+
+}
+
+
 module.exports = saleStorage

@@ -8,12 +8,12 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjlmNjViN
 Content-Type: application/json
 
 ###
-GET {{mylocalhost}}/customers/1
-Authorization: BearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjlmNjViNS00YWI1LTQ5YTMtOWVkMC1jNzExMDJlZTkyNDkiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjoyLCJpYXQiOjE2MDU1MTI2NTgsImV4cCI6MTYwNTU0NTA1OH0.OYqqe4g0CJRs1O7myPxUAZcyrSZ1r5PpT4KXLdz1JCo
+GET {{mylocalhost}}/customers/39
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjlmNjViNS00YWI1LTQ5YTMtOWVkMC1jNzExMDJlZTkyNDkiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjoyLCJpYXQiOjE2MDU1MTUyNjcsImV4cCI6MTYwNTU0NzY2N30.mCWYjDL-HmzU4dTis5RIyI14VL1xYcMJP6aLmEX8x78
 Content-Type: application/json
 
 ###
-GET {{mylocalhost}}/customers/branch/3
+GET {{mylocalhost}}/customers/branch/1
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjlmNjViNS00YWI1LTQ5YTMtOWVkMC1jNzExMDJlZTkyNDkiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjoyLCJpYXQiOjE2MDU1MTUyNjcsImV4cCI6MTYwNTU0NzY2N30.mCWYjDL-HmzU4dTis5RIyI14VL1xYcMJP6aLmEX8x78
 Content-Type: application/json
 
@@ -30,5 +30,11 @@ Content-Type: application/json
     "phone":"1231353",
     "branch_idbranch":"4"
 }
+
+
+###
+GET {{mylocalhost}}/customers/history/30
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjlmNjViNS00YWI1LTQ5YTMtOWVkMC1jNzExMDJlZTkyNDkiLCJyb2wiOiJhZG1pbiIsImlkdmVuZG9yIjoyLCJpYXQiOjE2MDU1MTUyNjcsImV4cCI6MTYwNTU0NzY2N30.mCWYjDL-HmzU4dTis5RIyI14VL1xYcMJP6aLmEX8x78
+Content-Type: application/application/json
 
 
