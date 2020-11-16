@@ -41,7 +41,7 @@ async function getCustomerbr(req, res) {
             ok: true,
             data: data
         })
-    } catch (err) {
+    } catch (error) {
         respondError(res, error)
         return
     }

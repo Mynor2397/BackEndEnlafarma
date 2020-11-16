@@ -36,11 +36,8 @@ customStorage.getbyId = async (id) => {
 }
 
 customStorage.getbybranch = async (br) => {
-    var sql = `select ve.name as name_vendor, br.name as name_branch, cu.idcustomer, cu.name as name_customer
-                from vendors ve
-                inner join branch br on br.idbranch = ve.idvendor
-                inner join customers cu on cu.branch_idbranch = br.idbranch
-                where br.idbranch = ?`
+    var sql = `SELECT * FROM customers
+    where branch_idbranch = ?;`
     return new Promise((resolve, reject) => {
         connect.query(sql, [br], (err, rows) => {
             if (err) {
