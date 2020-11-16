@@ -65,6 +65,7 @@ async function getCustomer(req, res) {
 async function createCustomer(req, res) {
     let Customerdata = new Customer()
     Customerdata = req.body
+    Customerdata.vendors_idvendor = req.user.idvendor
 
     try {
         let results = await customStorage.createCustomer(Customerdata)

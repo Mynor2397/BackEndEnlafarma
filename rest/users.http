@@ -1,4 +1,5 @@
 @hostdev = http://localhost:4002/api
+@hostfreelogin = http://localhost:4002
 @hostfree = https://devcenter.heroku.com/categories/command-line
 
 
@@ -17,10 +18,10 @@ Content-Type: application/json
 
 //ESTO ES PARA LOGIN
 ###
-POST {{hostfree}}/login
+POST {{hostfreelogin}}/login
 Content-Type: application/json
 
 {
-    "email":"hector@gmail.com",
+    "email":"luis@gmail.com",
     "password":"123"
 }

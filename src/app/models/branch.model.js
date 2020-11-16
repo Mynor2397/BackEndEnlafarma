@@ -1,15 +1,19 @@
 const connect = require('../database/database')
 const branchStorage = {}
 
-branchStorage.getBranch = async (idVendor) => {
-    
-    let sql = `select idbranch, name, vendors_idvendor from branch WHERE vendors_idvendor = ?`
-    
+branchStorage.getBranch = async (iduser) => {
+
+    var sql = `
+            SELECT b.idbranch, b.name, b.vendors_idvendor FROM branch b
+            INNER JOIN vendors v ON v.idvendor = b.vendors_idvendor
+            INNER JOIN login l ON l.vendors_idvendor = v.idvendor
+            WHERE l.idLogin = ?`
+
     return new Promise((resolve, reject) => {
-        connect.query(sql, [idVendor], (err, rows) => {
+        connect.query(sql, [iduser], (err, rows) => {
             if (err) {
                 reject(err)
-            console.log(rows)
+                console.log(rows)
             }
             if (rows) {
                 resolve(rows)
@@ -20,12 +24,15 @@ branchStorage.getBranch = async (idVendor) => {
 
 
 
+branchStorage.getbyId = async (idbranch, iduser) => {
+    var sql = `
+        SELECT b.idbranch, b.name, b.vendors_idvendor FROM branch b
+        INNER JOIN vendors v ON v.idvendor = b.vendors_idvendor
+        INNER JOIN login l ON l.vendors_idvendor = v.idvendor
+        WHERE b.idbranch = ? AND  l.idLogin = ?`
 
-
-branchStorage.getbyId = async (id) => {
-    var sql = `select idbranch, name, vendors_idvendor from branch where idbranch = ?`
     return new Promise((resolve, reject) => {
-        connect.query(sql, [id], (err, rows) => {
+        connect.query(sql, [idbranch, iduser], (err, rows) => {
             if (err) {
                 reject(err)
             }
