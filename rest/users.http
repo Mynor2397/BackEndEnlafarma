@@ -1,5 +1,5 @@
 @hostdev = http://localhost:4002/api
-@hostfree = http://localhost:4002
+@hostfree = https://devcenter.heroku.com/categories/command-line
 
 
 //ESTO ES PARA CREAR USUARIOS
@@ -9,7 +9,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMjA2MjU4Y
 Content-Type: application/json
 
 {
-    "email":"luis@gmail.com",
+    "email":"hector@gmail.com",
     "password":"123",
     "rol":"1",
     "idvendor":"1"
@@ -21,6 +21,6 @@ POST {{hostfree}}/login
 Content-Type: application/json
 
 {
-    "email":"luis@gmail.com",
+    "email":"hector@gmail.com",
     "password":"123"
 }
